@@ -1,0 +1,44 @@
+
+{% extends 'applists/base.html' %}
+
+
+{% block title_block %}Movie List{% endblock %}
+
+
+{% block body_block %}
+
+	<form method="GET">
+		<input type="text" name="name" value="{{request.get.name}}" placeholder="Search movie title">
+
+		<button type="submit" class="btn btn-default">Go!</button>
+	</form>
+
+	<br />
+	<br />
+
+	<!-- Loop through the movies -->
+
+	<div class="row">
+		{% for movie in movies %}
+		<div class="col-lg-4 col-sm-12">
+			<div class="thumbnail" style="text-align:center">
+				<!-- Determine if user is logged in to authorize for updating and deleting movie entry. -->
+				{% if user.is_authenticated %}
+					<h4>{{ movie.name }}</h4>
+					<a href="{% url 'movies:movie_update' pk=movie.id %}">Update</a> OR <a href="{% url 'movies:movie_delete' pk=movie.id %}">Delete</a>
+				{% else %}
+					<h4>{{ movie.name }}</h4>
+				{% endif%}
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+
+
+	<!-- Determine if user is logged in. Users who are logged in are the ones who are authorized to add movie to the list. -->
+	{% if user.is_authenticated %}
+		<a href="{% url 'movies:movie_create' %}" class="btn btn-primary btn-lg">Add Movie To The List</a>
+	{% else %}
+	{% endif %}
+
+{% endblock %}

@@ -1,0 +1,18 @@
+
+{% extends 'applists/base.html' %}
+
+{% block title_block %}Add New Song To The List{% endblock %}
+
+{% block body_block %}
+
+	<h3>Add New Song</h3>
+
+	<form method="POST">
+		
+		{% csrf_token %}
+		{{ form.as_p }}
+
+		<input type="submit" value="Add Song" class="btn btn-success btn-lg">
+	</form>
+
+{% endblock %}

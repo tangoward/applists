@@ -1,0 +1,18 @@
+
+{% extends 'applists/base.html' %}
+
+{% block title_block %}Add New Movie To The List{% endblock %}
+
+{% block body_block %}
+
+	<h3>Add New Movie</h3>
+
+	<form method="POST">
+		
+		{% csrf_token %}
+		{{ form.as_p }}
+
+		<input type="submit" value="Add Movie" class="btn btn-success btn-lg">
+	</form>
+
+{% endblock %}
